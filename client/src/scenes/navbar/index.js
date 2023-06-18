@@ -11,7 +11,6 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-
 import {
   Search,
   Message,
@@ -41,8 +40,7 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const fullName = user ? `${user.firstName} ${user.lastName}` : '';
-
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -59,7 +57,7 @@ const Navbar = () => {
             },
           }}
         >
-          ShareSphere
+          Sociopedia
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
