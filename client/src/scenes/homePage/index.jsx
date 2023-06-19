@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
-import Navbar from "../navbar/index.js";
-import UserWidget from "../widgets/UserWidget.js";
-import MyPostWidget from "../widgets/MyPostWidget.js";
-import PostsWidget from "../widgets/PostWidget.js";
-import AdvertWidget from "../widgets/AdvertWidget.js";
-import FriendListWidget from "../widgets/FriendListWidget.js";
+import Navbar from "../navbar/index.jsx";
+import UserWidget from "../widgets/UserWidget.jsx";
+import MyPostWidget from "../widgets/MyPostWidget.jsx";
+import PostsWidget from "../widgets/PostWidget.jsx";
+import AdvertWidget from "../widgets/AdvertWidget.jsx";
+import FriendListWidget from "../widgets/FriendListWidget.jsx";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");

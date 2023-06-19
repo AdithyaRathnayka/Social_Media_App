@@ -12,11 +12,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import FlexBetween from "../../components/FlexBetween.js";
-import Friend from "../../components/Friend.js";
-import WidgetWrapper from "../../components/WidgetWrapper.js";
+import FlexBetween from "../../components/FlexBetween.jsx";
+import Friend from "../../components/Friend.jsx";
+import WidgetWrapper from "../../components/WidgetWrapper.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "../../state/index.js";
+import { setPost } from "../../state/index.jsx";
 
 const PostWidget = ({
   postId,

@@ -13,9 +13,9 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../../state/index.js";
+import { setLogin } from "../../state/index.jsx";
 import Dropzone from "react-dropzone";
-import FlexBetween from "../../components/FlexBetween.js";
+import FlexBetween from "../../components/FlexBetween.jsx";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -57,6 +57,7 @@ const Form = () => {
   const isRegister = pageType === "register";
 
   const register = async (values, onSubmitProps) => {
+
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {

@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import Friend from "../../components/Friend.js";
-import WidgetWrapper from "../../components/WidgetWrapper.js";
-import { useEffect } from "react";
+import Friend from "../../components/Friend.jsx";
+import WidgetWrapper from "../../components/WidgetWrapper.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setFriends } from "../../state/index.js";
+import { setFriends } from "../../state/index.jsx";
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -27,6 +26,10 @@ const FriendListWidget = ({ userId }) => {
   useEffect(() => {
     getFriends();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!Array.isArray(friends)) {
+    return null; // Handle the case when friends is not an array
+  }
 
   return (
     <WidgetWrapper>
