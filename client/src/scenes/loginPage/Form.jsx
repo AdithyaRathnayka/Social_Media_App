@@ -76,6 +76,7 @@ const Form = () => {
     onSubmitProps.resetForm();
 
     if (savedUser) {
+      alert("Registration Successful!"); 
       setPageType("login");
     }
   };
@@ -86,6 +87,7 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
+    
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
@@ -95,6 +97,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
+      alert("Login Successful!"); 
       navigate("/home");
     }
   };

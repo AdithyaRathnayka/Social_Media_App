@@ -1,5 +1,7 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import Comment from "../models/comment.js";
+
 
 /* CREATE */
 export const createPost = async (req, res) => {
@@ -72,4 +74,40 @@ export const likePost = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+/*DELETE*/
+
+export const deletePost = async (req, res) => {
+  const { postId } = req.params;
+
+  try {
+    
+    await Post.findByIdAndDelete(postId);
+
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+/*ADD COMMENT*/
+export const addComment = async (req, res) => {
+  const { postId } = req.params;
+  const { comment } = req.body;
+
+  try {
+    const newComment = new Comment({
+      postId,
+      comment,
+    });
+
+    await newComment.save();
+
+    res.status(201).json(newComment);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 

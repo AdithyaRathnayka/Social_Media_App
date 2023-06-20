@@ -18,15 +18,14 @@ import {
   Button,
 } from "@mui/material";
 import {
-  Search,
-  PolicyIcon, 
+  Search, 
   DarkMode,
   LightMode,
-  Notifications,
   Help,
   Menu,
   Close,
 } from "@mui/icons-material";
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "../../state/index.jsx";
 import { useNavigate } from "react-router-dom";
@@ -35,31 +34,26 @@ import FlexBetween from "../../components/FlexBetween.jsx";
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [isTermsDialogOpen, setIsTermsDialogOpen] = useState(false);
+  const [isPolicyDialogOpen, setIsPolicyDialogOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  const [isMessagingOpen, setIsMessagingOpen] = useState(false);
-  const [selectedFriend, setSelectedFriend] = useState(null);
-  const [messageInput, setMessageInput] = useState("");
-
-  const handleMessagingClick = (friendId) => {
-    setIsMessagingOpen(true);
-    setSelectedFriend(friendId);
-  };
-
-  const handleMessageSend = () => {
-    // Implement your logic for sending the message here
-    console.log(`Sending message "${messageInput}" to ${selectedFriend}`);
-    setMessageInput("");
-  };
 
   const handleTermsDialogOpen = () => {
     setIsTermsDialogOpen(true);
   };
 
   const handleTermsDialogClose = () => {
+    setIsTermsDialogOpen(false);
+  };
+
+  const handlePolicyDialogOpen = () => {
+    setIsTermsDialogOpen(true);
+  };
+
+  const handlePolicyDialogClose = () => {
     setIsTermsDialogOpen(false);
   };
 
@@ -116,13 +110,10 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-          <IconButton onClick={() => handleMessagingClick("friendId")}>
-            <PolicyIcon sx={{ fontSize: "25px" }} />
-          </IconButton>
 
-        
-          <Notifications sx={{ fontSize: "25px" }} />
-        
+          <IconButton onClick={handlePolicyDialogOpen}>
+            <PrivacyTipIcon sx={{ fontSize: "25px" }} />
+            </IconButton>
 
           <IconButton onClick={handleTermsDialogOpen}>
             <Help sx={{ fontSize: "25px" }} />
@@ -198,9 +189,13 @@ const Navbar = () => {
               ) : (
                 <LightMode sx={{ color: dark, fontSize: "25px" }} />
               )}
+            </IconButton >
+
+            <IconButton onClick={handlePolicyDialogOpen}>
+            <PrivacyTipIcon sx={{ fontSize: "25px" }} />
             </IconButton>
-            <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
+
+  
             <IconButton onClick={handleTermsDialogOpen}>
               <Help sx={{ fontSize: "25px" }} />
             </IconButton>
@@ -281,6 +276,49 @@ We hope this guide has helped you understand the basic functionalities of Sociop
         </DialogContent>
         <DialogActions>
           <Button onClick={handleTermsDialogClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+
+            {/* TERMS DIALOG */}
+            <Dialog open={isPolicyDialogOpen} onClose={handlePolicyDialogClose}>
+        <DialogTitle><h2>Privacy Policy</h2></DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+         <p> This Privacy Policy governs the manner in which our social media application "the App" collects, 
+          uses, maintains, and discloses information collected from users "Users" or "you" of the App. This policy applies to the App and all products and services offered by us.</p>
+
+<h3>Information Collection</h3>
+We may collect personal identification information from Users in various ways, including but not limited 
+to when Users download and install the App, register an account, interact with the App, and in connection with other activities, services, features, or resources we make available through the App. The personal identification information we may collect includes, but is not limited to, your name, email address, username, 
+and any other information you voluntarily provide to us..
+<h3>Information Usage</h3>
+To personalize the user experience and improve the App.
+To send periodic emails or notifications regarding updates, news, and related information about the App.
+To respond to user inquiries, feedback, or support requests.
+<h3>Information Protection</h3>
+We adopt appropriate data collection, storage, and processing practices, as well as security measures,
+ to protect against unauthorized access, alteration, disclosure, or destruction of your 
+personal information, username, password, and other data stored on our servers.
+<h3>Third-Party Service Providers: </h3>
+We may engage trusted third-party service providers to assist us in operating our business and the App, 
+or to perform certain functions on our behalf, such as hosting servers or analyzing user data. We ensure that
+ these service providers are bound by appropriate confidentiality obligations and 
+use the information solely for the purposes specified by us.
+<h3>Disclosure of Information:</h3>
+Legal Requirements: We may disclose your personal information if required by law or in response to valid requests 
+ public authorities e.g., law enforcement agencies.
+<h3>Changes to this Privacy Policy</h3>
+We reserve the right to update this Privacy Policy at any time. When we do, we will revise
+ the updated date at the beginning of this policy. We encourage Users to periodically review this policy to 
+ stay informed about how we are
+ protecting and using the information we collect.
+<h3>Contacting Us</h3>
+f you have any questions or concerns about this Privacy Policy or the App's practices, please contact us at socialmedia@gmail.com.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handlePolicyDialogClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </FlexBetween>

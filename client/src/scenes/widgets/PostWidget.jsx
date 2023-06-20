@@ -3,8 +3,9 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
+  SendOutlined,
 } from "@mui/icons-material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Box,
   Divider,
@@ -60,7 +61,51 @@ const PostWidget = ({
       dispatch(setPost({ post: updatedPost }));
     } catch (error) {
       console.error(error);
-     
+    }
+  };
+
+  const handleAddComment = async () => {
+    const newComment = "Your new comment"; // Replace "Your new comment" with the actual comment value
+  
+    try {
+      const response = await fetch(`http://localhost:3001/posts/${postId}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ comment: newComment }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to add comment.");
+      }
+      const updatedPost = await response.json();
+  
+
+      dispatch(setPost({ post: updatedPost }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const json =await response.json();
+
+      if (!response.ok) {
+        throw new Error("Failed to delete post");
+      }else {
+        dispatch({type: "DELETE_POST", payload:json})
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -72,6 +117,7 @@ const PostWidget = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
+
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
@@ -107,13 +153,13 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
-        <IconButton>
-          <ShareOutlined />
+        <IconButton onClick={handleDelete}>
+          <DeleteIcon />
         </IconButton>
       </FlexBetween>
       {isComments && (
         <Box mt="2rem">
-              {comments.map((comment, i) => (
+          {comments.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
@@ -122,6 +168,12 @@ const PostWidget = ({
             </Box>
           ))}
           <Divider />
+          <Box display="flex" alignItems="center" mt="1rem">
+            <input type="text" placeholder="Add a comment..." />
+            <IconButton onClick={handleAddComment}>
+              <SendOutlined />
+            </IconButton>
+          </Box>
         </Box>
       )}
     </WidgetWrapper>
