@@ -60,7 +60,7 @@ const PostWidget = ({
       dispatch(setPost({ post: updatedPost }));
     } catch (error) {
       console.error(error);
-      // Handle error state or display an error message to the user
+     
     }
   };
 
@@ -112,8 +112,8 @@ const PostWidget = ({
         </IconButton>
       </FlexBetween>
       {isComments && (
-        <Box mt="0.5rem">
-          {comments.map((comment, i) => (
+        <Box mt="2rem">
+              {comments.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>

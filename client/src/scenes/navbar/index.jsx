@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import {
   Search,
-  Message,
+  PolicyIcon, 
   DarkMode,
   LightMode,
   Notifications,
@@ -27,7 +27,6 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "../../state/index.jsx";
 import { useNavigate } from "react-router-dom";
@@ -118,7 +117,7 @@ const Navbar = () => {
             )}
           </IconButton>
           <IconButton onClick={() => handleMessagingClick("friendId")}>
-            <Message sx={{ fontSize: "25px" }} />
+            <PolicyIcon sx={{ fontSize: "25px" }} />
           </IconButton>
 
         
